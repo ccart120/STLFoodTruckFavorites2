@@ -19,8 +19,10 @@ namespace STLFoodTruckFavorites2.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            List<FoodTruckListViewModel> models = FoodTruckListViewModel.GetFoodTruckListViewModels(context);
+            return View(models);
         }
+
         [HttpGet]
         public IActionResult Create()
         {
