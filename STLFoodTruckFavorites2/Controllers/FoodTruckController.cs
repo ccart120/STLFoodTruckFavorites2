@@ -36,5 +36,25 @@ namespace STLFoodTruckFavorites2.Controllers
             model.Persist(context);
             return View(model);
         }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            return View(model:new FoodTruckEditViewModel(context,id));
+        }
+
+        [HttpPost]
+        public IActionResult Edit(FoodTruckEditViewModel foodTruckEditViewModel, int id)
+        {
+            foodTruckEditViewModel.Persist(context, id);
+            return RedirectToAction(actionName: nameof(Index));
+
+        }
+        
+        public IActionResult Delete()
+        {
+            return View();
+        }
+
     }
 }
