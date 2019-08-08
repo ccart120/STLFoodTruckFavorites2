@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using STLFoodTruckFavorites2.Data;
+using STLFoodTruckFavorites2.Models;
 using STLFoodTruckFavorites2.ViewModels;
 
 namespace STLFoodTruckFavorites2.Controllers
@@ -11,6 +12,7 @@ namespace STLFoodTruckFavorites2.Controllers
     public class FoodTruckController : Controller
     {
         private ApplicationDbContext context;
+        public List<FoodTruck> foodTrucks = new List<FoodTruck>();
 
         public FoodTruckController(ApplicationDbContext context)
         {
@@ -51,9 +53,13 @@ namespace STLFoodTruckFavorites2.Controllers
 
         }
         
-        public IActionResult Delete()
-        {
-            return View();
+        public IActionResult Delete(int id)
+        { 
+            foodTrucks = context.FoodTrucks.ToList();
+            FoodTruck foodTruck = foodTrucks.SingleOrDefault(f => f.ID == id);
+            context.Remove(foodTruck);
+            context.SaveChanges();
+            return RedirectToAction(actionName: nameof(Index));
         }
 
     }
