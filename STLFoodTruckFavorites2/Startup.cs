@@ -39,12 +39,14 @@ namespace STLFoodTruckFavorites2
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
-
-            //services.AddDefaultIdentity<IdentityUser>()
-            //    .AddDefaultUI(UIFramework.Bootstrap4)
+            //services.AddIdentity<IdentityUser, IdentityRole>()
             //    .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            //Using DefaultIdentity brings up a register or log in screen when linked are clicked
+            services.AddDefaultIdentity<IdentityUser>()
+                .AddRoles<IdentityRole>()
+                .AddDefaultUI(UIFramework.Bootstrap4)
+                .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.Configure<IdentityOptions>(options =>
             {
