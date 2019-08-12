@@ -39,7 +39,8 @@ namespace STLFoodTruckFavorites2.Controllers
         public IActionResult Create(FoodTruckCreateViewModel model)
         {
             model.Persist(context);
-            return View(model);
+            return RedirectToAction(actionName: nameof(Index));
+            //return View(model);
         }
 
         [HttpGet]
