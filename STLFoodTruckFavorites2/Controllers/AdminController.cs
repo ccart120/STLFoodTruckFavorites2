@@ -12,6 +12,7 @@ namespace STLFoodTruckFavorites2.Controllers
     [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
+        
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly UserManager<IdentityUser> userManager;
 

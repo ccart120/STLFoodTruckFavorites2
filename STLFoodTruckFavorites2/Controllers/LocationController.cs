@@ -42,5 +42,31 @@ namespace STLFoodTruckFavorites2.Controllers
         }
 
 
+        [HttpGet]
+
+        public IActionResult Edit(int id)
+        {
+            return View(model: new LocationEditViewModel(context, id));
+        }
+
+        [HttpPost]
+
+        public IActionResult Edit(LocationEditViewModel locationEditViewModel, int id)
+        {
+            locationEditViewModel.Persist(context, id);
+            return RedirectToAction(actionName: nameof(Index));
+
+        }
+
+        //public IActionResult Delete(int id)
+        //{
+        //    locations = context.Locations.ToList();
+        //    Location location = locations.SingleOrDefault(l => l.ID == id);
+        //    context.Remove(location);
+        //    context.SaveChanges();
+        //    return RedirectToAction(actionName: nameof(Index));
+        //}
+
+
     }
 }
