@@ -9,7 +9,6 @@ using STLFoodTruckFavorites2.ViewModels;
 
 namespace STLFoodTruckFavorites2.Controllers
 {
-    //test authorization
     [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
