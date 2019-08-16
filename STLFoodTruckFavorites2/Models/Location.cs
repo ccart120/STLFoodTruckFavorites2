@@ -10,5 +10,7 @@ namespace STLFoodTruckFavorites2.Models
         public int ID { get; set; }
         public string Name { get; set; }
 
+        public List<LocationFoodTruck> LocationFoodTrucks { get; set; }
+
     }
 }
