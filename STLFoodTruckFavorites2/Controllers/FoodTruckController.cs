@@ -10,8 +10,7 @@ using STLFoodTruckFavorites2.ViewModels;
 
 namespace STLFoodTruckFavorites2.Controllers
 {
-    //changed authorization to admin for all methods
-    [Authorize(Roles = "Admin")]
+    
     public class FoodTruckController : Controller
     {
         private ApplicationDbContext context;
@@ -21,13 +20,20 @@ namespace STLFoodTruckFavorites2.Controllers
         {
             this.context = context;
         }
-        
+        [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
             List<FoodTruckListViewModel> models = FoodTruckListViewModel.GetFoodTruckListViewModels(context);
             return View(models);
         }
 
+        public IActionResult UserIndex()
+        {
+            List<FoodTruckListViewModel> models = FoodTruckListViewModel.GetFoodTruckListViewModels(context);
+            return View(models);
+        }
+
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         
         public IActionResult Create()
@@ -35,7 +41,7 @@ namespace STLFoodTruckFavorites2.Controllers
             FoodTruckCreateViewModel model = new FoodTruckCreateViewModel();
             return View(model);
         }
-        
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         
         public IActionResult Create(FoodTruckCreateViewModel model)
@@ -45,8 +51,8 @@ namespace STLFoodTruckFavorites2.Controllers
             //return View(model);
         }
 
-       
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         
         public IActionResult Edit(int id)
@@ -54,6 +60,7 @@ namespace STLFoodTruckFavorites2.Controllers
             return View(model:new FoodTruckEditViewModel(context,id));
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         
         public IActionResult Edit(FoodTruckEditViewModel foodTruckEditViewModel, int id)
@@ -62,7 +69,7 @@ namespace STLFoodTruckFavorites2.Controllers
             return RedirectToAction(actionName: nameof(Index));
 
         }
-        
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(int id)
         { 
             foodTrucks = context.FoodTrucks.ToList();
